@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Lab — Задание 7</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- .prevent отменяет действие по умолчанию -->
+        <form @submit.prevent="onSubmit">
+            <input v-model="email" type="email" required>
+            <button type="submit">Отправить</button>
+        </form>
+        <p>Отправлено: {{ lastEmail }}</p>
+
+        <!-- .stop останавливает всплытие -->
+        <div @click="outer" style="padding:20px;background:#eee">
+            Внешний блок
+            <button @click.stop="inner">Внутренний (stop)</button>
+        </div>
+
+        <!-- .once срабатывает один раз -->
+        <button @click.once="onceClick">Нажми один раз</button>
+        <p>Один раз нажато: {{ onceClicked }}</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return { email: '', lastEmail: '', onceClicked: false };
+            },
+            methods: {
+                onSubmit() { this.lastEmail = this.email; this.email = ''; },
+                outer() { alert('Клик по внешнему блоку'); },
+                inner() { alert('Клик по кнопке'); },
+                onceClick() { this.onceClicked = true; }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

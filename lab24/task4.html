@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Lab — Задание 4</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Счётчик: {{ count }}</h2>
+        <button @click="increment">+1</button>
+        <button @click="decrement">-1</button>
+        <button @click="reset">Сброс</button>
+
+        <hr>
+        <h3>Ввод имени</h3>
+        <input v-model="tempName" @keyup.enter="addName" placeholder="Имя + Enter">
+        <button @click="addName">Добавить</button>
+        <ul>
+            <li v-for="(n, i) in names" :key="i">
+                {{ n }}
+                <button @click="removeName(i)">✖</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    count: 0,
+                    tempName: '',
+                    names: ['Анна', 'Борис']
+                };
+            },
+            methods: {
+                increment() { this.count++; },
+                decrement() { if (this.count > 0) this.count--; },
+                reset() { this.count = 0; },
+                addName() {
+                    const name = this.tempName.trim();
+                    if (name) {
+                        this.names.push(name);
+                        this.tempName = '';
+                    }
+                },
+                removeName(index) {
+                    this.names.splice(index, 1);
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

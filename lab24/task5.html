@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Lab — Задание 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Калькулятор</h2>
+        <input type="number" v-model.number="a">
+        <input type="number" v-model.number="b">
+        <p>Сумма: {{ sum }}</p>
+        <p>Произведение: {{ product }}</p>
+        <p>Среднее: {{ average.toFixed(2) }}</p>
+
+        <hr>
+        <p>Символов введено: {{ message.length }}</p>
+        <input v-model="message" placeholder="Введите текст">
+        <p>Обратный текст: {{ reversedMessage }}</p>
+        <p v-if="tooLong">⚠️ Слишком длинное сообщение!</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    a: 0,
+                    b: 0,
+                    message: '',
+                    tooLong: false
+                };
+            },
+            computed: {
+                sum() { return this.a + this.b; },
+                product() { return this.a * this.b; },  // ← звёздочку добавьте
+                average() { return (this.a + this.b) / 2; },
+                reversedMessage() {
+                    return this.message.split('').reverse().join('');
+                }
+            },
+            watch: {
+                message(newVal) {
+                    this.tooLong = newVal.length > 20;
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Lab — Задание 1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <p>Привет, {{ user.name }}!</p>
+        <p>Возраст: {{ user.age }}</p>
+        <p>Через 5 лет: {{ user.age + 5 }}</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    title: 'Моё первое Vue-приложение',
+                    user: { name: 'Эвелина', age: 19 }
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

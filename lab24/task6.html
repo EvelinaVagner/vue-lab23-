@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Lab — Задание 6</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .active { background: #d4edda; padding: 5px; }  /* ← добавлен # */
+        .text-bold { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p :class="{ active: isActive, 'text-bold': isBold }">
+            Динамический текст
+        </p>
+        <p :class="[baseClass, isActive ? 'active' : '']">Массив классов</p>
+        <p :style="{ color: textColor, fontSize: fontSize + 'px' }">
+            Стилизованный текст
+        </p>
+
+        <button @click="isActive = !isActive">Переключить класс</button>
+        <button @click="textColor = textColor === 'red' ? 'blue' : 'red'">
+            Сменить цвет
+        </button>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    isActive: false,
+                    isBold: true,
+                    baseClass: 'paragraph',
+                    textColor: 'red',
+                    fontSize: 18
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

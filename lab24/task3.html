@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Lab — Задание 3</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Список студентов</h2>
+        <ul>
+            <li v-for="(student, index) in students" :key="student.id">
+                {{ index + 1 }}. {{ student.name }} — {{ student.grade }}
+                <span v-if="student.grade >= 4">✅</span>
+                <span v-else>❌</span>
+            </li>
+        </ul>
+        <p v-if="students.length === 0">Список пуст</p>
+        <p v-else>Всего студентов: {{ students.length }}</p>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    students: [
+                        { id: 1, name: 'Анна', grade: 5 },
+                        { id: 2, name: 'Борис', grade: 3 },
+                        { id: 3, name: 'Виктор', grade: 4 }
+                    ]
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

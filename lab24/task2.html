@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Lab — Задание 2</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-model="username" placeholder="Введите имя">
+        <p>Привет, <strong>{{ username }}</strong>!</p>
+
+        <input type="checkbox" v-model="isActive" id="chk">
+        <label for="chk">Активен</label>
+        <p>Статус: {{ isActive ? 'Онлайн' : 'Оффлайн' }}</p>
+
+        <img :src="avatarUrl" :alt="username" width="100">
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    username: 'Гость',
+                    isActive: false,
+                    avatarUrl: 'https://placehold.co/100x100?text=Avatar'
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
